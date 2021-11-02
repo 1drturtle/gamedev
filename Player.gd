@@ -5,6 +5,7 @@ export var acceleration = 750
 var velocity = Vector2.ZERO
 export var gravity = 200
 var jump_force = 120
+var die = 0
 
 export var friction = 0.15
 export var max_speed = 80
