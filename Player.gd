@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-
+signal gameover
 export var acceleration = 750
 var velocity = Vector2.ZERO
 export var gravity = 200
@@ -52,3 +52,10 @@ func _physics_process(delta):
 
 func _on_Hurtbox_area_entered(area):
 	hp -= 1
+	if hp <= 0:
+		queue_free()
+		emit_signal("gameover")
+
+
+func _on_Hitbox_area_entered(area):
+	velocity.y = -jump_force

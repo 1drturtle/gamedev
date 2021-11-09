@@ -25,3 +25,7 @@ func _physics_process(delta):
 		direction *= -1
 		floorHit.position.x *= -1
 		wallHit.cast_to.x *= -1
+
+
+func _on_Hurtbox_area_entered(area):
+	queue_free()
