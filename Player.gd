@@ -7,6 +7,8 @@ export var gravity = 200
 var jump_force = 120
 var die = 0
 
+var score = 0
+
 export var friction = 0.15
 export var max_speed = 80
 export var jumps = 3
@@ -15,6 +17,8 @@ export var hp = 5
 onready var sprite = $Sprite
 onready var animation_player = $"Player Animation"
 onready var hp_label = $"Player HP"
+onready var score_label = $"Player Score"
+onready var crateInstance = preload("res://Crate.tscn")
 
 func _physics_process(delta):
 	var x_input = Input.get_action_strength('ui_right') - Input.get_action_strength('ui_left')
@@ -38,10 +42,13 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed('ui_up') and jumps > 0:
 		velocity.y = -jump_force
 		jumps -= 1
-	
+		
 	velocity = move_and_slide(velocity, Vector2.UP, false, 4, PI/4, true)
+	
+	# update label
+	score_label.text = str(score) + " points"
+	hp_label.text = str(hp) + " hp"
 
 
 func _on_Hurtbox_area_entered(area):
 	hp -= 1
-	hp_label.text = str(hp) + " hp"
